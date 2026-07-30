@@ -8,6 +8,16 @@ hosted on Cloudflare Workers.
 - `list_interesting_numbers` lists the available constants.
 - `get_interesting_number` returns a constant, its defining formula, a decimal
   approximation, and why it matters.
+- The `mathcp://pi/methods` resource lists ten methods for calculating π,
+  including each formula and its convergence characteristics.
+- `calculate_pi` accepts a method identifier and a number of decimal digits
+  (0–10,000), then returns the arbitrary-precision result and method metadata.
+- `find_prime_numbers` uses MCP elicitation to ask exactly two questions (the
+  minimum and maximum), then returns every prime in that inclusive range.
+- `investigate_prime_patterns` calculates verified primes and successive prime
+  gaps, then uses MCP sampling to ask the client's language model for a cautious
+  pattern analysis. Ranges are limited to a span of 2,000 integers to keep the
+  sampling request bounded. This tool requires a client that supports sampling.
 - Prompt templates provide three different ways to explore a maths topic:
   - `mc_escher` uses symmetry, tessellation, recursion, and visual metaphors.
     Example: “Explain hyperbolic geometry using a repeating tiled world.”
