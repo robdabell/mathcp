@@ -34,6 +34,22 @@ npm test
 npm run dev
 ```
 
+Run the same MCP server locally over `stdio`:
+
+```bash
+npm run mcp:local
+```
+
+For Codex, register the executable directly so npm does not write status text to
+the MCP protocol stream:
+
+```bash
+codex mcp add mathcp-local -- \
+  node \
+  --import /absolute/path/to/mathcp/node_modules/tsx/dist/loader.mjs \
+  /absolute/path/to/mathcp/src/stdio.ts
+```
+
 Copy the example secrets file and set a long random bearer token before starting
 the local server:
 
