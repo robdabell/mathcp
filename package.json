@@ -1,13 +1,24 @@
 {
   "name": "mathcp",
   "version": "0.1.0",
+  "description": "An MCP server for interesting mathematical constants, arbitrary-precision pi, and prime number tools.",
   "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robdabell/mathcp.git"
+  },
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
+    "build:stdio": "esbuild src/stdio.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/stdio.js --log-level=warning",
     "check": "tsc --noEmit",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "mcp:local": "node --import tsx src/stdio.ts",
+    "start": "node dist/stdio.js",
     "test": "vitest run"
   },
   "dependencies": {
@@ -17,8 +28,9 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20260730.1",
-    "typescript": "^5.9.0",
+    "esbuild": "0.28.1",
     "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
     "vitest": "^4.1.0",
     "wrangler": "4.115.0"
   }
