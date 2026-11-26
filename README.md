@@ -1,7 +1,73 @@
 # mathcp
 
-A small, stateless MCP server for some of mathematics' most interesting constants,
-hosted on Cloudflare Workers.
+[![Docker image](https://github.com/robdabell/mathcp/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/robdabell/mathcp/pkgs/container/mathcp)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+A small, stateless [MCP](https://modelcontextprotocol.io) server for exploring
+mathematics: famous constants, π to 10,000 digits by ten classic methods, prime
+numbers, and prompt templates for learning maths in different styles. It runs
+locally over `stdio` (Docker or Node.js) or remotely on Cloudflare Workers.
+
+## Quick start
+
+### Docker (recommended)
+
+No setup beyond Docker. Add this to your MCP client's configuration, for example
+`claude_desktop_config.json` for Claude Desktop or `.cursor/mcp.json` for Cursor:
+
+```json
+{
+  "mcpServers": {
+    "mathcp": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "ghcr.io/robdabell/mathcp:latest"]
+    }
+  }
+}
+```
+
+For Claude Code:
+
+```bash
+claude mcp add mathcp -- docker run -i --rm ghcr.io/robdabell/mathcp:latest
+```
+
+To build the image yourself instead: `docker build -t mathcp .` and use `mathcp`
+in place of the image name above.
+
+### Node.js
+
+Requires Node.js 22 or later.
+
+```bash
+git clone https://github.com/robdabell/mathcp.git
+cd mathcp
+npm install
+npm run build:stdio
+```
+
+Then point your client at the bundled server:
+
+```json
+{
+  "mcpServers": {
+    "mathcp": {
+      "command": "node",
+      "args": ["/absolute/path/to/mathcp/dist/stdio.js"]
+    }
+  }
+}
+```
+
+The local `stdio` server needs no API keys or bearer token.
+
+### Things to try
+
+- “What is the golden ratio and why does it matter?”
+- “Calculate π to 500 digits using the Chudnovsky method, then with Machin's formula, and check they agree.”
+- “Find all the primes between 1,000 and 1,100.” (uses elicitation)
+- “Investigate prime gaps between 10,000 and 12,000.” (uses sampling)
+- Use the `ada_lovelace` prompt with the topic “Euclid's algorithm”.
 
 ## What it exposes
 
@@ -36,6 +102,9 @@ imaginary unit. The code is deliberately data-driven so another constant can be
 added in one place.
 
 ## Develop locally
+
+The remote Cloudflare Worker version requires a bearer token; the local
+`stdio` server above does not.
 
 ```bash
 npm install
@@ -88,3 +157,7 @@ Wrangler prints the deployed Worker URL. Append `/mcp` when configuring an MCP
 client, for example `https://mathcp.<account>.workers.dev/mcp`. Configure the MCP
 client to send the same bearer header. The root description and `/health` remain
 public; `/mcp` requires authentication in both local and deployed environments.
+
+## Licence
+
+[MIT](LICENSE)

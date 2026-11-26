@@ -46,10 +46,12 @@ export function createServer(): McpServer {
     "calculate_pi",
     {
       title: "Calculate pi",
-      description: "Calculate π using a named method from the pi-calculation-methods resource.",
+      description:
+        "Calculate π to between 0 and 10,000 decimal places with exact arbitrary-precision arithmetic, using one of ten classic methods. Returns JSON with the method, its name, the digit count, and the value as a string. Methods: chudnovsky, ramanujan, machin, gauss_legendre, borwein, bbp, nilakantha, leibniz, wallis, vieta (details in the mathcp://pi/methods resource).",
+      annotations: { readOnlyHint: true, openWorldHint: false },
       inputSchema: z.object({
-        method: z.string().describe("Method identifier from mathcp://pi/methods"),
-        digits: z.number().int().min(0).max(10_000).describe("Number of digits after the decimal point"),
+        method: z.string().describe("Method identifier, e.g. \"chudnovsky\" or \"machin\". Case-insensitive; hyphens are accepted for underscores."),
+        digits: z.number().int().min(0).max(10_000).describe("Number of digits after the decimal point, 0 to 10,000"),
       }),
     },
     async ({ method, digits }) => {
@@ -81,7 +83,10 @@ export function createServer(): McpServer {
   server.registerTool(
     "list_interesting_numbers",
     {
-      description: "List the mathematical constants available from MathCP.",
+      title: "List interesting numbers",
+      description:
+        "List the mathematical constants MathCP knows about (currently pi, e, phi and i). Returns JSON with each constant's id, name and symbol; pass an id to get_interesting_number for details.",
+      annotations: { readOnlyHint: true, openWorldHint: false },
       inputSchema: z.object({}),
     },
     async () => ({
@@ -105,7 +110,8 @@ export function createServer(): McpServer {
     {
       title: "Find prime numbers",
       description:
-        "Ask the user for a minimum and maximum, then return every prime number in that inclusive range.",
+        "Ask the user, through MCP elicitation, for a minimum and maximum, then return every prime number in that inclusive range. Takes no arguments; requires a client that supports elicitation.",
+      annotations: { readOnlyHint: true, openWorldHint: false },
       inputSchema: z.object({}),
     },
     async (_args, ctx) => {
@@ -159,11 +165,12 @@ export function createServer(): McpServer {
     {
       title: "Investigate prime-number patterns",
       description:
-        "Calculate primes and prime gaps, then ask the client's language model to identify a pattern and form a cautious conjecture.",
+        "List the primes and successive prime gaps between minimum and maximum (2 to 100,000, spanning at most 2,000 integers), then use MCP sampling to ask the client's language model for a cautious pattern analysis that separates observation from conjecture. Requires a client that supports sampling.",
+      annotations: { readOnlyHint: true, openWorldHint: false },
       inputSchema: z
         .object({
-          minimum: z.number().int().min(2).max(100_000),
-          maximum: z.number().int().min(2).max(100_000),
+          minimum: z.number().int().min(2).max(100_000).describe("Smallest integer to check, from 2 to 100,000"),
+          maximum: z.number().int().min(2).max(100_000).describe("Largest integer to check, at most 2,000 above minimum"),
         })
         .refine(({ minimum, maximum }) => minimum <= maximum, {
           message: "The minimum must be less than or equal to the maximum.",
@@ -228,8 +235,10 @@ export function createServer(): McpServer {
   server.registerTool(
     "get_interesting_number",
     {
+      title: "Get an interesting number",
       description:
-        "Get a mathematical constant, its formula, decimal value, and significance.",
+        "Get one mathematical constant (pi, e, phi or i) with its symbol, defining formula, decimal approximation and why it matters.",
+      annotations: { readOnlyHint: true, openWorldHint: false },
       inputSchema: z.object({
         id: z
           .string()
