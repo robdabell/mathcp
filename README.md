@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/mathcp-logo.svg" alt="mathcp logo" width="160" height="160">
+</p>
+
 # mathcp
 
 [![Docker image](https://github.com/robdabell/mathcp/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/robdabell/mathcp/pkgs/container/mathcp)
