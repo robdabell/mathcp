@@ -3,6 +3,7 @@
 [![Docker image](https://github.com/robdabell/mathcp/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/robdabell/mathcp/pkgs/container/mathcp)
 [![CI](https://github.com/robdabell/mathcp/actions/workflows/ci.yml/badge.svg)](https://github.com/robdabell/mathcp/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![mathcp MCP server – quality and maintenance score on Glama](https://glama.ai/mcp/servers/robdabell/mathcp/badges/score.svg)](https://glama.ai/mcp/servers/robdabell/mathcp)
 
 [![mathcp MCP server – quality and maintenance score on Glama](https://glama.ai/mcp/servers/robdabell/mathcp/badges/card.svg)](https://glama.ai/mcp/servers/robdabell/mathcp)
 
