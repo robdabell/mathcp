@@ -3,10 +3,27 @@
 [![Docker image](https://github.com/robdabell/mathcp/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/robdabell/mathcp/pkgs/container/mathcp)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A small, stateless [MCP](https://modelcontextprotocol.io) server for exploring
-mathematics: famous constants, π to 10,000 digits by ten classic methods, prime
-numbers, and prompt templates for learning maths in different styles. It runs
-locally over `stdio` (Docker or Node.js) or remotely on Cloudflare Workers.
+**Give your AI assistant a maths toolkit it can trust.** mathcp is an
+[MCP](https://modelcontextprotocol.io) server that computes π to as many as
+10,000 exact decimal places with any of ten classic algorithms, finds and
+analyses prime numbers, and explains famous constants such as e, φ and i.
+Language models are bad at long arithmetic, so mathcp does the exact work and
+lets the model do the explaining.
+
+- **Exact π, ten ways.** Chudnovsky, Ramanujan, Machin, Gauss–Legendre, Borwein,
+  BBP, Nilakantha, Leibniz, Wallis and Viète, with arbitrary-precision results
+  and notes on how fast each converges.
+- **Primes and their patterns.** Every prime in a range, plus successive prime
+  gaps that the client's model analyses, keeping observation separate from
+  conjecture.
+- **Constants with context.** The formula, value and significance of π, e, the
+  golden ratio and the imaginary unit.
+- **Three ways to learn.** Prompt templates in the styles of M. C. Escher (visual),
+  Ada Lovelace (algorithmic) and Srinivasa Ramanujan (pattern hunting).
+
+It runs locally over `stdio` with no API keys (Docker or Node.js), or remotely on
+Cloudflare Workers. It also demonstrates newer MCP features: resources, prompts,
+elicitation and sampling.
 
 ## Quick start
 

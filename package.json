@@ -1,7 +1,7 @@
 {
   "name": "mathcp",
   "version": "0.1.0",
-  "description": "An MCP server for interesting mathematical constants, arbitrary-precision pi, and prime number tools.",
+  "description": "MCP server that gives AI assistants exact maths: \u03c0 to 10,000 digits by ten algorithms, prime numbers and prime-gap analysis, and famous constants explained.",
   "private": true,
   "license": "MIT",
   "repository": {

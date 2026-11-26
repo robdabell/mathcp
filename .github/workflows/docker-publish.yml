@@ -78,7 +78,7 @@ jobs:
             type=sha
           labels: |
             org.opencontainers.image.title=mathcp
-            org.opencontainers.image.description=MCP server for interesting mathematical constants, arbitrary-precision pi, and prime number tools (stdio)
+            org.opencontainers.image.description=MCP server that gives AI assistants exact maths: pi to 10,000 digits, prime numbers, and famous constants explained
             org.opencontainers.image.licenses=MIT
 
       - name: Build and publish (amd64 + arm64)
